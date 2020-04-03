@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+.table {
+  margin-left: 300px;
+  margin-top: 100px;
+  width: 50%;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+span.toolbar {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}

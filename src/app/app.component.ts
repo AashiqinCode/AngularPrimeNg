@@ -1,76 +1,75 @@
-import { Component, OnInit } from '@angular/core';
-import { Car } from './domain/car';
-import { CarService } from './services/carservice';
+import { Component, OnInit } from "@angular/core";
+import { Car } from "./domain/car";
+import { CarService } from "./services/carservice";
 
 export class PrimeCar implements Car {
-    constructor(public vin?, public year?, public brand?, public color?) {}
+  constructor(public vin?, public year?, public brand?, public color?) {}
 }
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    providers: [CarService]
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
+  providers: [CarService]
 })
 export class AppComponent implements OnInit {
+  displayDialog: boolean;
 
-    displayDialog: boolean;
+  car: Car = new PrimeCar();
 
-    car: Car = new PrimeCar();
+  selectedCar: Car;
 
-    selectedCar: Car;
+  newCar: boolean;
 
-    newCar: boolean;
+  cars: Car[];
 
-    cars: Car[];
+  cols: any[];
+  title: string;
+  constructor(private carService: CarService) {}
 
-    cols: any[];
+  ngOnInit() {
+    this.carService.getCarsSmall().then(cars => (this.cars = cars));
+    this.title = "Conflux Applicaiton";
+    this.cols = [
+      { field: "brand", header: "Name" },
+      { field: "year", header: "Role" },
+      { field: "color", header: "Model" },
+      { field: "vin", header: "Availability(100)%" }
+    ];
+  }
 
-    constructor(private carService: CarService) { }
+  showDialogToAdd() {
+    this.newCar = true;
+    this.car = new PrimeCar();
+    this.displayDialog = true;
+  }
 
-    ngOnInit() {
-        this.carService.getCarsSmall().then(cars => this.cars = cars);
-
-        this.cols = [
-            { field: 'vin', header: 'Vin' },
-            { field: 'year', header: 'Year' },
-            { field: 'brand', header: 'Brand' },
-            { field: 'color', header: 'Color' }
-        ];
+  save() {
+    const cars = [...this.cars];
+    if (this.newCar) {
+      cars.push(this.car);
+    } else {
+      cars[this.findSelectedCarIndex()] = this.car;
     }
+    this.cars = cars;
+    this.car = null;
+    this.displayDialog = false;
+  }
 
-    showDialogToAdd() {
-        this.newCar = true;
-        this.car = new PrimeCar();
-        this.displayDialog = true;
-    }
+  delete() {
+    const index = this.findSelectedCarIndex();
+    this.cars = this.cars.filter((val, i) => i !== index);
+    this.car = null;
+    this.displayDialog = false;
+  }
 
-    save() {
-        const cars = [...this.cars];
-        if (this.newCar) {
-            cars.push(this.car);
-        } else {
-            cars[this.findSelectedCarIndex()] = this.car;
-        }
-        this.cars = cars;
-        this.car = null;
-        this.displayDialog = false;
-    }
+  onRowSelect(event) {
+    this.newCar = false;
+    this.car = { ...event.data };
+    this.displayDialog = true;
+  }
 
-    delete() {
-        const index = this.findSelectedCarIndex();
-        this.cars = this.cars.filter((val, i) => i !== index);
-        this.car = null;
-        this.displayDialog = false;
-    }
-
-    onRowSelect(event) {
-        this.newCar = false;
-        this.car = {...event.data};
-        this.displayDialog = true;
-    }
-
-    findSelectedCarIndex(): number {
-        return this.cars.indexOf(this.selectedCar);
-    }
+  findSelectedCarIndex(): number {
+    return this.cars.indexOf(this.selectedCar);
+  }
 }
