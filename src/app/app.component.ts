@@ -1,71 +1,71 @@
 import { Component, OnInit } from "@angular/core";
-import { Car } from "./domain/car";
-import { CarService } from "./services/carservice";
+import { Emp } from "./domain/emp";
+import { EmpService } from "./services/empservice";
 
-export class PrimeCar implements Car {
-  constructor(public vin?, public year?, public brand?, public color?) {}
+export class PrimeCar implements Emp {
+  constructor(public name?, public role?, public model?, public avail?) {}
 }
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
-  providers: [CarService]
+  providers: [EmpService],
 })
 export class AppComponent implements OnInit {
   displayDialog: boolean;
 
-  car: Car = new PrimeCar();
+  emp: Emp = new PrimeCar();
 
-  selectedCar: Car;
+  selectedCar: Emp;
 
   newCar: boolean;
 
-  cars: Car[];
+  cars: Emp[];
 
   cols: any[];
   title: string;
-  constructor(private carService: CarService) {}
+  constructor(private carService: EmpService) {}
 
   ngOnInit() {
-    this.carService.getCarsSmall().then(cars => (this.cars = cars));
+    this.carService.getCarsSmall().then((cars) => (this.cars = cars));
     this.title = "Conflux Applicaiton";
     this.cols = [
-      { field: "brand", header: "Name" },
-      { field: "year", header: "Role" },
-      { field: "color", header: "Model" },
-      { field: "vin", header: "Availability(100)%" }
+      { field: "name", header: "Name" },
+      { field: "role", header: "Role" },
+      { field: "model", header: "Model" },
+      { field: "avail", header: "Availability(100)%" },
     ];
   }
 
   showDialogToAdd() {
     this.newCar = true;
-    this.car = new PrimeCar();
+    this.emp = new PrimeCar();
     this.displayDialog = true;
   }
 
   save() {
     const cars = [...this.cars];
     if (this.newCar) {
-      cars.push(this.car);
+      cars.push(this.emp);
     } else {
-      cars[this.findSelectedCarIndex()] = this.car;
+      cars[this.findSelectedCarIndex()] = this.emp;
     }
     this.cars = cars;
-    this.car = null;
+    this.emp = null;
     this.displayDialog = false;
   }
 
   delete() {
     const index = this.findSelectedCarIndex();
     this.cars = this.cars.filter((val, i) => i !== index);
-    this.car = null;
+    this.emp = null;
     this.displayDialog = false;
   }
 
   onRowSelect(event) {
     this.newCar = false;
-    this.car = { ...event.data };
+    this.emp = { ...event.data };
     this.displayDialog = true;
   }
 

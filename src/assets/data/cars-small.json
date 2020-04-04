@@ -1,8 +1,0 @@
-{
-  "data": [
-    { "brand": "Aashiq", "year": "Dev", "color": "Scrum", "vin": "50%" },
-    { "brand": "Guna", "year": "Dev", "color": "Scrum", "vin": "50%" },
-    { "brand": "Satheesh", "year": "Admin", "color": "Kanban", "vin": "100%" },
-    { "brand": "Bala", "year": "Owner", "color": "Scrum", "vin": "100%" }
-  ]
-}

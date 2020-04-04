@@ -57,25 +57,25 @@
     [closable]="true"
     [style]="{ width: '300px' }"
   >
-    <div class="ui-g ui-fluid" *ngIf="car">
-      <div class="ui-g-4"><label for="vin">Name</label></div>
+    <div class="ui-g ui-fluid" *ngIf="emp">
+      <div class="ui-g-4"><label for="name">Name</label></div>
       <div class="ui-g-8">
-        <input pInputText id="vin" [(ngModel)]="car.brand" />
+        <input pInputText id="name" [(ngModel)]="emp.name" />
       </div>
 
-      <div class="ui-g-4"><label for="year">Role</label></div>
+      <div class="ui-g-4"><label for="role">Role</label></div>
       <div class="ui-g-8">
-        <input pInputText id="year" [(ngModel)]="car.year" />
+        <input pInputText id="role" [(ngModel)]="emp.role" />
       </div>
 
-      <div class="ui-g-4"><label for="brand">Model</label></div>
+      <div class="ui-g-4"><label for="model">Model</label></div>
       <div class="ui-g-8">
-        <input pInputText id="brand" [(ngModel)]="car.color" />
+        <input pInputText id="model" [(ngModel)]="emp.model" />
       </div>
 
-      <div class="ui-g-4"><label for="color">Available</label></div>
+      <div class="ui-g-4"><label for="avail">Available</label></div>
       <div class="ui-g-8">
-        <input pInputText id="color" [(ngModel)]="car.vin" />
+        <input pInputText id="avail" [(ngModel)]="emp.avail" />
       </div>
     </div>
     <p-footer>
@@ -102,3 +102,4 @@
 <!-- <div class="display">
   <p>{{ car.values }}</p>
 </div> -->
+  

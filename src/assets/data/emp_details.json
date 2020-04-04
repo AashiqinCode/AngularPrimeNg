@@ -1,0 +1,8 @@
+{
+  "data": [
+    { "name": "Aashiq", "role": "Dev", "model": "Scrum", "avail": "50%" },
+    { "name": "Guna", "role": "Dev", "model": "Scrum", "avail": "50%" },
+    { "name": "Satheesh", "role": "Admin", "model": "Kanban", "avail": "100%" },
+    { "name": "Bala", "role": "Owner", "model": "Scrum", "avail": "100%" }
+  ]
+}
